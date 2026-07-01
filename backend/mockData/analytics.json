@@ -1,0 +1,16 @@
+{
+  "eduChannel": [
+    {"sprint": 115, "activeUsers": 48200},
+    {"sprint": 116, "activeUsers": 51400},
+    {"sprint": 117, "activeUsers": 49800},
+    {"sprint": 118, "activeUsers": 63500},
+    {"sprint": 119, "activeUsers": 58900}
+  ],
+  "edu": [
+    {"sprint": 115, "activeUsers": 31500},
+    {"sprint": 116, "activeUsers": 34200},
+    {"sprint": 117, "activeUsers": 32800},
+    {"sprint": 118, "activeUsers": 44100},
+    {"sprint": 119, "activeUsers": 39600}
+  ]
+}
