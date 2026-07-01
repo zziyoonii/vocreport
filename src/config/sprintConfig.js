@@ -19,7 +19,7 @@ export function sprintToDateRange(sprintNo) {
 }
 
 export const SERVICES = [
-  { id: 'ide', label: '구름IDE' },
-  { id: 'edu', label: '구름EDU' },
-  { id: 'bootcamp', label: '구름Bootcamp' },
+  { id: 'edu', label: 'EDU CH & EDU' },
+  { id: 'devth', label: 'Devth' },
+  { id: 'arkain', label: 'Arkain' },
 ];

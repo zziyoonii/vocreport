@@ -1,16 +1,24 @@
 {
   "eduChannel": [
-    {"sprint": 115, "activeUsers": 48200},
-    {"sprint": 116, "activeUsers": 51400},
-    {"sprint": 117, "activeUsers": 49800},
-    {"sprint": 118, "activeUsers": 63500},
-    {"sprint": 119, "activeUsers": 58900}
+    {"sprint": 111, "activeUsers": 82300},
+    {"sprint": 112, "activeUsers": 86100},
+    {"sprint": 113, "activeUsers": 84500},
+    {"sprint": 114, "activeUsers": 88200},
+    {"sprint": 115, "activeUsers": 87100},
+    {"sprint": 116, "activeUsers": 87176},
+    {"sprint": 117, "activeUsers": 87176},
+    {"sprint": 118, "activeUsers": 93638},
+    {"sprint": 119, "activeUsers": 91200}
   ],
   "edu": [
-    {"sprint": 115, "activeUsers": 31500},
-    {"sprint": 116, "activeUsers": 34200},
-    {"sprint": 117, "activeUsers": 32800},
-    {"sprint": 118, "activeUsers": 44100},
-    {"sprint": 119, "activeUsers": 39600}
+    {"sprint": 111, "activeUsers": 5800},
+    {"sprint": 112, "activeUsers": 6200},
+    {"sprint": 113, "activeUsers": 5900},
+    {"sprint": 114, "activeUsers": 6500},
+    {"sprint": 115, "activeUsers": 6400},
+    {"sprint": 116, "activeUsers": 6909},
+    {"sprint": 117, "activeUsers": 6909},
+    {"sprint": 118, "activeUsers": 8310},
+    {"sprint": 119, "activeUsers": 8050}
   ]
 }
