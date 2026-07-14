@@ -1,9 +1,6 @@
-import { useEffect, useState } from 'react';
-import { sprintToDateRange, currentSprintNo } from '../config/sprintConfig.js';
-import { api } from '../services/api.js';
+import { sprintToDateRange } from '../config/sprintConfig.js';
 import ExternalCSSection from './ExternalCSSection.jsx';
 import InternalCSSection from './InternalCSSection.jsx';
-import BacklogSection from './BacklogSection.jsx';
 import UVDetailSection from './UVDetailSection.jsx';
 import SprintVoCComparison from './SprintVoCComparison.jsx';
 
@@ -13,7 +10,6 @@ export default function ServiceDetailDashboard({ service, sprint, onBack }) {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* 헤더 */}
       <header className="bg-white border-b border-gray-100 px-8 py-4 flex items-center justify-between shadow-sm">
         <div className="flex items-center gap-4">
           <button
@@ -37,29 +33,28 @@ export default function ServiceDetailDashboard({ service, sprint, onBack }) {
       </header>
 
       <main className="max-w-6xl mx-auto px-8 py-6 space-y-6">
-        {/* UV 지표 (EDU만) */}
+
+        {/* ① MetaKPI — UV (EDU만) */}
         {service.id === 'edu' && (
-          <UVDetailSection sprint={sprint} prevSprint={prevSprint} />
+          <section>
+            <h2 className="text-sm font-semibold text-gray-500 mb-3 flex items-center gap-2">
+              <span>📈</span> UV 지표
+            </h2>
+            <UVDetailSection sprint={sprint} prevSprint={prevSprint} />
+          </section>
         )}
 
-        {/* 외부 CS + 내부 CS (2단 그리드) */}
-        <div className="grid grid-cols-2 gap-6">
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
-            <h2 className="text-sm font-semibold text-gray-500 mb-4 flex items-center gap-2">
-              <span>💬</span> 외부 CS 지표
-            </h2>
-            <ExternalCSSection service={service.id} sprint={sprint} />
-          </div>
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
-            <h2 className="text-sm font-semibold text-gray-500 mb-4 flex items-center gap-2">
-              <span>📋</span> 내부 CS 지표
-            </h2>
-            <InternalCSSection service={service.id} sprint={sprint} />
-          </div>
-        </div>
+        {/* ② 외부 CS 지표 */}
+        <section className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+          <h2 className="text-sm font-semibold text-gray-500 mb-4 flex items-center gap-2">
+            <span>💬</span> 외부 CS 지표
+            <span className="ml-auto text-xs font-normal text-gray-300">S{sprint}</span>
+          </h2>
+          <ExternalCSSection service={service.id} sprint={sprint} />
+        </section>
 
-        {/* 스프린트 VoC 비교 분석 */}
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+        {/* ③ AI VoC 비교 분석 */}
+        <section className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
           <h2 className="text-sm font-semibold text-gray-500 mb-4 flex items-center gap-2">
             <span>🔍</span> 스프린트 VoC 비교 분석
             <span className="ml-1 text-xs font-normal text-indigo-400 bg-indigo-50 px-2 py-0.5 rounded-full">
@@ -67,7 +62,16 @@ export default function ServiceDetailDashboard({ service, sprint, onBack }) {
             </span>
           </h2>
           <SprintVoCComparison service={service.id} prevSprint={prevSprint} curSprint={sprint} />
-        </div>
+        </section>
+
+        {/* ④ 내부 CS 지표 */}
+        <section className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+          <h2 className="text-sm font-semibold text-gray-500 mb-4 flex items-center gap-2">
+            <span>📋</span> 내부 CS 지표
+          </h2>
+          <InternalCSSection service={service.id} sprint={sprint} />
+        </section>
+
       </main>
     </div>
   );

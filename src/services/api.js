@@ -7,10 +7,10 @@ async function get(path) {
 }
 
 export const api = {
-  externalCS: (service) => get(`/sheets/external-cs/${service}`),
-  internalCS: (service) => get(`/sheets/internal-cs/${service}`),
+  externalCS: (service, sprint) => get(`/sheets/external-cs/${service}?sprint=${sprint}`),
+  internalCS: (service, sprint) => get(`/sheets/internal-cs/${service}?sprint=${sprint}`),
   sprintRaw: () => get('/sheets/sprint-raw'),
-  vocInsight: (prev, cur) => get(`/sheets/voc-insight?sprints=${prev},${cur}`),
+  vocInsight: (prev, cur, service = 'edu') => get(`/sheets/voc-insight?sprints=${prev},${cur}&service=${service}`),
   cacheStatus: () => get('/sheets/voc-insight/cache-status'),
   deleteCache: (prev, cur) =>
     fetch(`${BASE}/sheets/voc-insight/cache?prevSprint=${prev}&currentSprint=${cur}`, { method: 'DELETE' }).then((r) => r.json()),

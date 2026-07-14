@@ -1,13 +1,10 @@
 import { Router } from 'express';
-import { createRequire } from 'module';
 import { config } from '../config/config.js';
 import { getUV } from '../services/googleAnalytics.js';
 import { sprintToDateRange } from '../../src/config/sprintConfig.js';
+import { getUVData } from '../data/mockData.js';
 
-const require = createRequire(import.meta.url);
 const router = Router();
-
-const mockAnalytics = require('../mockData/analytics.json');
 
 function changeRate(prev, cur) {
   if (!prev) return null;
@@ -20,25 +17,22 @@ router.get('/summary/:service', async (req, res) => {
     const sprintNum = Number(sprint);
 
     if (config.useMockData || !config.ga4PropertyIdEduCh) {
-      const eduChRows = mockAnalytics.eduChannel;
-      const eduRows = mockAnalytics.edu;
-
-      const cur = eduChRows.find((r) => r.sprint === sprintNum);
-      const prev = eduChRows.find((r) => r.sprint === sprintNum - 1);
-      const curEdu = eduRows.find((r) => r.sprint === sprintNum);
-      const prevEdu = eduRows.find((r) => r.sprint === sprintNum - 1);
+      const curCh  = getUVData('edu-channel', sprintNum);
+      const prevCh = getUVData('edu-channel', sprintNum - 1);
+      const curEdu  = getUVData('edu', sprintNum);
+      const prevEdu = getUVData('edu', sprintNum - 1);
 
       return res.json({
         sprint: sprintNum,
         eduChannel: {
-          activeUsers: cur?.activeUsers ?? null,
-          prevActiveUsers: prev?.activeUsers ?? null,
-          change: cur && prev ? changeRate(prev.activeUsers, cur.activeUsers) : null,
+          activeUsers: curCh.activeUsers,
+          prevActiveUsers: prevCh.activeUsers,
+          change: changeRate(prevCh.activeUsers, curCh.activeUsers),
         },
         edu: {
-          activeUsers: curEdu?.activeUsers ?? null,
-          prevActiveUsers: prevEdu?.activeUsers ?? null,
-          change: curEdu && prevEdu ? changeRate(prevEdu.activeUsers, curEdu.activeUsers) : null,
+          activeUsers: curEdu.activeUsers,
+          prevActiveUsers: prevEdu.activeUsers,
+          change: changeRate(prevEdu.activeUsers, curEdu.activeUsers),
         },
       });
     }
